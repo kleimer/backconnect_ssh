@@ -1,0 +1,13 @@
+[Unit]
+Description=Reverse SSH connection
+After=network.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/ssh -g -N -T -o "ServerAliveInterval 10" -o "ExitOnForwardFailure yes" -R 8111:localhost:22 -i /YOU_private_key login@pub_server.xyz
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
